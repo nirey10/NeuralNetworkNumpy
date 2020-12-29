@@ -28,15 +28,15 @@ if __name__=="__main__":
     num_epochs        = 100
     samples_per_class = 10000
     num_classes       = 2
-    hidden_units      = 10
+    hidden_units      = 100
     hidden_units2 =    10
     data,target       = shuffle(X_train, y_train)
-    #data,target       =utilities.genSpiralData(samples_per_class,num_classes)
+    data,target       =utilities.genSpiralData(samples_per_class,num_classes)
     model             = utilities.Model()
     model.add(layers.Linear(2,hidden_units))
     model.add(activations.ReLU())
     model.add(layers.Softmax(hidden_units,num_classes))
-    optim   = optimizers.SGD(model.parameters,lr=0.03)
+    optim   = optimizers.SGD(model.parameters,lr=0.1)
     loss_fn = layers.SoftmaxWithLoss()
     model.fit(data,target,batch_size,num_epochs,optim,loss_fn)
     predicted_labels = np.argmax(model.predict(data),axis=1)
