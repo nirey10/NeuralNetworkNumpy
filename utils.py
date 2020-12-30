@@ -1,11 +1,23 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy.io
+import matplotlib.pyplot as plt
+
+
+def plot_scores(accuracy_scores):
+    plt.plot(range(len(accuracy_scores)), accuracy_scores)
+    plt.xlabel('epoch')
+    plt.ylabel('accuracy')
+    plt.ylim(ymin=0, ymax=1)
+    plt.title('accuracy over epochs')
+    plt.show()
+
 
 def cross_entropy_loss(X,target):
     probability = X
     loss = -np.log(probability[range(len(target)), target])
     return loss.mean()
+
 
 def get_data(dataset_name):
     SwissRoll = scipy.io.loadmat('dataset/' + dataset_name + '.mat')
@@ -22,7 +34,7 @@ def get_data(dataset_name):
     y_train = np.argmax(y_train, axis=1)
     y_test = np.argmax(y_test, axis=1)
 
-    return X_train, X_test, y_train, y_test
+    return X_train, y_train, X_test, y_test
 
 def plot2DData(data,target):
     plt.scatter(x = data[:,0],y = data[:,1],c = target,cmap=plt.cm.rainbow)

@@ -27,12 +27,16 @@ class MyNeuralNetwork(Abstract_Model):
                 bias.data = 0.
 
 
-    def fit(self, data, target, batch_size, num_epochs, optimizer):
+    def fit(self, X_train, y_train, X_test, y_test, batch_size, num_epochs, optimizer, num_accuracy_calc):
         loss_history = []
+        train_accuracy = []
+        test_accuracy = []
         self.init()
-        data_gen = utils.DataGenerator(data, target, batch_size)
+        data_gen = utils.DataGenerator(X_train, y_train, batch_size)
         itr = 0
         for epoch in range(num_epochs):
+            epoch_iter = 0
+            epoch_accuracy = []
             for X, Y in data_gen:
                 optimizer.zeroGrad()
                 #for f in self.graph: X = f.forward(X)
@@ -40,11 +44,19 @@ class MyNeuralNetwork(Abstract_Model):
                 loss = utils.cross_entropy_loss(probabilities, Y)
                 self.backward(Y)
                 loss_history += [loss]
-                print("Loss at epoch = {} and iteration = {}: {}".format(epoch, itr, loss_history[-1]))
+                #print("Loss at epoch = {} and iteration = {}: {}".format(epoch, itr, loss_history[-1]))
                 itr += 1
+                epoch_iter += 1
                 optimizer.step()
+                epoch_acc = self.evaluate(X, Y)
+                epoch_accuracy.append(epoch_acc)
 
-        return loss_history
+            train_acc = np.array(epoch_accuracy).sum()/epoch_iter
+            train_accuracy.append(train_acc)
+            test_acc = self.evaluate(X_test, y_test)
+            test_accuracy.append(test_acc)
+            print("epoch = {}, train accuracy = {} test accuracy = {}".format(epoch, train_acc, test_acc))
+        return loss_history, train_accuracy, test_accuracy
 
     def forward(self, X):
         for f in self.graph: X = f.forward(X)
@@ -53,6 +65,11 @@ class MyNeuralNetwork(Abstract_Model):
     def backward(self, true_label):
         grad = true_label
         for f in self.graph[::-1]: grad = f.backward(grad)
+
+    def evaluate(self, X_test, y_test):
+        predicted_labels = np.argmax(self.predict(X_test), axis=1)
+        accuracy = np.sum(predicted_labels == y_test) / len(y_test)
+        return accuracy
 
     def predict(self, data):
         X = data
