@@ -1,29 +1,30 @@
 import numpy as np
 
-from function import Function
+class Abstract_Activation(object):
+    def forward(self):
+        raise NotImplementedError
+
+    def backward(self):
+        raise NotImplementedError
 
 
-class ReLU(Function):
-    inplace: bool
-    activated: np.ndarray
+class ReLU(Abstract_Activation):
+    activation_output: np.ndarray
 
-    def __init__(self, inplace=True):
+    def __init__(self):
         self.type = 'activation'
-        self.inplace = inplace
+        self.activation_output = None
 
     def forward(self, x: np.ndarray) -> np.ndarray:
-        if self.inplace:
-            x[x < 0] = 0.
-            self.activated = x
-        else:
-            self.activated = x * (x > 0)
-        return self.activated
+        x[x < 0] = 0.
+        self.activation_output = x
+        return self.activation_output
 
     def backward(self, d_y: np.ndarray) -> np.ndarray:
-        return d_y * (self.activated > 0)
+        return d_y * (self.activation_output > 0)
 
 
-class Tanh(Function):
+class Tanh(Abstract_Activation):
     inplace: bool
     activated: np.ndarray
 

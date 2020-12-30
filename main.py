@@ -1,10 +1,11 @@
-import utilities
+import utils
 import numpy as np
 import scipy.io
 from sklearn.utils import shuffle
 import activations
 import layers
 import optimizers
+import models
 
 # TODO Organize this file
 
@@ -33,17 +34,17 @@ if __name__=="__main__":
     hidden_units      = 100
     hidden_units2 =    10
     data,target       = shuffle(X_train, y_train)
-    data,target       =utilities.genSpiralData(samples_per_class,num_classes)
-    model             = utilities.Model()
+    data,target       =utils.genSpiralData(samples_per_class, num_classes)
+    model             = models.MyNeuralNetwork()
     model.add(layers.Linear(2,hidden_units))
     model.add(activations.ReLU())
-    model.add(layers.Softmax(hidden_units,num_classes))
-    optim   = optimizers.SGD(model.parameters,lr=0.1)
-    loss_fn = layers.SoftmaxWithLoss()
-    model.fit(data,target,batch_size,num_epochs,optim,loss_fn)
+    model.add(layers.Softmax(hidden_units, num_classes))
+    optim = optimizers.SGD(model.parameters, lr=0.1)
+
+    model.fit(data,target,batch_size,num_epochs,optim)
     predicted_labels = np.argmax(model.predict(data),axis=1)
     accuracy         = np.sum(predicted_labels==target)/len(target)
     print("Model Accuracy = {}".format(accuracy))
-    utilities.plot2DDataWithDecisionBoundary(data,target,model)
+    utils.plot2DDataWithDecisionBoundary(data, target, model)
 
 
