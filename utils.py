@@ -1,12 +1,28 @@
 import numpy as np
 import matplotlib.pyplot as plt
-
+import scipy.io
 
 def cross_entropy_loss(X,target):
     probability = X
     loss = -np.log(probability[range(len(target)), target])
     return loss.mean()
 
+def get_data(dataset_name):
+    SwissRoll = scipy.io.loadmat('dataset/' + dataset_name + '.mat')
+    y_train = np.array(SwissRoll['Ct'])
+    X_train = np.array(SwissRoll['Yt'])
+    y_test = np.array(SwissRoll['Cv'])
+    X_test = np.array(SwissRoll['Yv'])
+
+    X_train = np.transpose(X_train)
+    y_train = np.transpose(y_train)
+    X_test = np.transpose(X_test)
+    y_test = np.transpose(y_test)
+
+    y_train = np.argmax(y_train, axis=1)
+    y_test = np.argmax(y_test, axis=1)
+
+    return X_train, X_test, y_train, y_test
 
 def plot2DData(data,target):
     plt.scatter(x = data[:,0],y = data[:,1],c = target,cmap=plt.cm.rainbow)
