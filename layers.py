@@ -1,28 +1,6 @@
-from typing import List
-
 import numpy as np
 
-
-class Tensor:
-    def __init__(self, shape):
-        self.data = np.ndarray(shape, np.float32)
-        self.grad = np.ndarray(shape, np.float32)
-
-
-class Function(object):
-    weights: Tensor
-    bias: Tensor
-    type: str
-    input: np.ndarray
-
-    def forward(self, x) -> np.ndarray:
-        raise NotImplementedError
-
-    def backward(self, target) -> np.ndarray:
-        raise NotImplementedError
-
-    def getParams(self):
-        return [self.weights, self.bias]
+from function import Function, Tensor
 
 
 class Linear(Function):
@@ -71,19 +49,19 @@ class Softmax(Function):
         return grad_input
 
 
-class SoftmaxWithLoss(Function):
-    def __init__(self):
-        self.type = 'normalization'
-
-    def forward(self,x):
-        unnormalized_proba = np.exp(x-np.max(x,axis=1,keepdims=True))
-        self.proba         = unnormalized_proba/np.sum(unnormalized_proba,axis=1,keepdims=True)
-        #loss               = -np.log(self.proba[range(len(target)),target])
-        return self.proba
-
-    def backward(self, target):
-        self.target = target
-        gradient = self.proba
-        gradient[range(len(self.target)),self.target]-=1.0
-        gradient/=len(self.target)
-        return gradient
+# class SoftmaxWithLoss(Function):
+#     def __init__(self):
+#         self.type = 'normalization'
+#
+#     def forward(self,x):
+#         unnormalized_proba = np.exp(x-np.max(x,axis=1,keepdims=True))
+#         self.proba         = unnormalized_proba/np.sum(unnormalized_proba,axis=1,keepdims=True)
+#         #loss               = -np.log(self.proba[range(len(target)),target])
+#         return self.proba
+#
+#     def backward(self, target):
+#         self.target = target
+#         gradient = self.proba
+#         gradient[range(len(self.target)),self.target]-=1.0
+#         gradient/=len(self.target)
+#         return gradient
