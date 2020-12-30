@@ -6,6 +6,8 @@ import activations
 import layers
 import optimizers
 
+# TODO Organize this file
+
 if __name__=="__main__":
     SwissRoll = scipy.io.loadmat('dataset/SwissRollData.mat')
     y_train = np.array(SwissRoll['Ct'])

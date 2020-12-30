@@ -1,24 +1,33 @@
-import numpy as np 
+from typing import List
+
+import numpy as np
 import matplotlib.pyplot as plt
 
+from function import Function, Tensor
 
-class Model():
+# TODO Organize this file
+
+class Model:
+    computation_graph: List[Function]
+    parameters: List[Tensor]
+
     def __init__(self):
         self.computation_graph = []
-        self.parameters        = []
+        self.parameters = []
 
-    def add(self,layer):
+    def add(self, layer: Function):
         self.computation_graph.append(layer)
-        self.parameters+=layer.getParams()
+        self.parameters += layer.getParams()
 
     def __innitializeNetwork(self):
         for f in self.computation_graph:
-            if f.type=='linear':
-                weights,bias = f.getParams()
-                weights.data = .01*np.random.randn(weights.data.shape[0],weights.data.shape[1])
-                bias.data    = 0.
+            # TODO I need we need to fix this to apply softmax on output and relu/tanh on hidden
+            if f.type == 'linear':
+                weights, bias = f.getParams()
+                weights.data = .01 * np.random.randn(weights.data.shape[0],weights.data.shape[1])
+                bias.data = 0.
 
-    def fit(self,data,target,batch_size,num_epochs,optimizer,loss_fn):
+    def fit(self, data, target, batch_size, num_epochs, optimizer, loss_fn):
         loss_history = []
         self.__innitializeNetwork()
         data_gen = DataGenerator(data,target,batch_size)

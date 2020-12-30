@@ -1,5 +1,8 @@
 import numpy as np
 
+# TODO Organize this file
+
+
 class Optimizer(object):
     def __init__(self,parameters):
         self.parameters = parameters
