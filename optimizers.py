@@ -1,15 +1,12 @@
-import numpy as np
-import utils
 
 class Optimizer(object):
     def __init__(self, parameters):
         self.parameters = parameters
 
-    
-    def step(self): 
+    def step(self):
         raise NotImplementedError
 
-    def fit(self):
+    def fit(self, data, target, batch_size, epochs):
         raise NotImplementedError
 
     def zeroGrad(self):
@@ -26,21 +23,22 @@ class SGD(Optimizer):
         for p in self.parameters:
             p.data = p.data - self.lr * p.grad
 
-    # def fit(self, data, target, batch_size, epochs):
-    #     loss_history = []
-    #     data_gen = utils.DataGenerator(data, target, batch_size)
-    #     iteration = 0
-    #     for epoch in range(epochs):
-    #         for train_X, train_Y in data_gen:
-    #             self.zeroGrad()
-    #             probabilities = self.model.forward(train_X)
-    #             loss = utils.cross_entropy_loss(probabilities, train_Y)
-    #             self.model.backward(train_Y)
-    #             loss_history += [loss]
-    #             print("Loss at epoch = {} and iteration = {}: {}".format(epoch, iteration, loss_history[-1]))
-    #             iteration += 1
-    #             self.step()
-    #     return loss_history
+    def fit(self, data, target, batch_size, epochs):
+        # loss_history = []
+        # data_gen = utils.DataGenerator(data, target, batch_size)
+        # iteration = 0
+        # for epoch in range(epochs):
+        #     for train_X, train_Y in data_gen:
+        #         self.zeroGrad()
+        #         probabilities = self.model.forward(train_X)
+        #         loss = utils.cross_entropy_loss(probabilities, train_Y)
+        #         self.model.backward(train_Y)
+        #         loss_history += [loss]
+        #         print("Loss at epoch = {} and iteration = {}: {}".format(epoch, iteration, loss_history[-1]))
+        #         iteration += 1
+        #         self.step()
+        # return loss_history
+        pass
 
 # class SGD(Optimizer):
 #     def __init__(self, parameters, lr=.001, weight_decay=0.0, momentum=.9):

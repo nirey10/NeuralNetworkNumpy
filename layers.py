@@ -1,20 +1,24 @@
 import numpy as np
 
 
-class Tensor():
+class Tensor:
     def __init__(self, shape):
         self.data = np.ndarray(shape, np.float32)
         self.grad = np.ndarray(shape, np.float32)
 
+
 class Abstract_Layer(object):
-    def forward(self):
+    input: np.ndarray
+
+    def forward(self, x: np.ndarray) -> np.ndarray:
         raise NotImplementedError
 
-    def backward(self):
+    def backward(self, d_y: np.ndarray) -> np.ndarray:
         raise NotImplementedError
 
     def parameters(self):
         return []
+
 
 class Linear(Abstract_Layer):
     def __init__(self, in_nodes, out_nodes):

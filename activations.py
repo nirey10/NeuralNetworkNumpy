@@ -1,10 +1,11 @@
 import numpy as np
 
+
 class Abstract_Activation(object):
-    def forward(self):
+    def forward(self, x: np.ndarray) -> np.ndarray:
         raise NotImplementedError
 
-    def backward(self):
+    def backward(self, d_y: np.ndarray) -> np.ndarray:
         raise NotImplementedError
 
 

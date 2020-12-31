@@ -2,12 +2,14 @@ from activations import Abstract_Activation
 import numpy as np
 import utils
 
+
 class Abstract_Model(object):
-    def forward(self):
+    def forward(self, X):
         raise NotImplementedError
 
-    def backward(self):
+    def backward(self, true_label):
         raise NotImplementedError
+
 
 class MyNeuralNetwork(Abstract_Model):
     def __init__(self):
@@ -25,7 +27,6 @@ class MyNeuralNetwork(Abstract_Model):
                 weights, bias = f.parameters()
                 weights.data = .01 * np.random.randn(weights.data.shape[0], weights.data.shape[1])
                 bias.data = 0.
-
 
     def fit(self, X_train, y_train, X_test, y_test, batch_size, num_epochs, optimizer, num_accuracy_calc):
         loss_history = []

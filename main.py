@@ -17,7 +17,7 @@ if __name__=="__main__":
     hidden_units = 100
     hidden_units2 = 10
     dimensions = 2
-    #num_accuracy_calc = 1000  # number of samples to take for the accuracy plots
+    # num_accuracy_calc = 1000  # number of samples to take for the accuracy plots
 
     # PeaksData, SwissRollData, GMMData
     X_train, y_train, X_test, y_test = utils.get_data('SwissRollData')
