@@ -28,7 +28,7 @@ class MyNeuralNetwork(Abstract_Model):
                 weights.data = .01 * np.random.randn(weights.data.shape[0], weights.data.shape[1])
                 bias.data = 0.
 
-    def fit(self, X_train, y_train, X_test, y_test, batch_size, num_epochs, optimizer, num_accuracy_calc):
+    def fit(self, X_train, y_train, X_test, y_test, batch_size, num_epochs, optimizer):
         loss_history = []
         train_accuracy = []
         test_accuracy = []

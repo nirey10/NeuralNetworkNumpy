@@ -3,11 +3,13 @@ import scipy.io
 import matplotlib.pyplot as plt
 
 
-def plot_scores(accuracy_scores):
-    plt.plot(range(len(accuracy_scores)), accuracy_scores)
+def plot_scores(accuracy_scores_train, accuracy_scores_test):
+    plt.plot(range(len(accuracy_scores_train)), accuracy_scores_train)
+    plt.plot(range(len(accuracy_scores_test)), accuracy_scores_test)
     plt.xlabel('epoch')
     plt.ylabel('accuracy')
     plt.ylim(ymin=0, ymax=1)
+    plt.legend(["train", "test"])
     plt.title('accuracy over epochs')
     plt.show()
 
