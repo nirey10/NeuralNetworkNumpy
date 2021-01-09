@@ -21,7 +21,7 @@ def cross_entropy_loss(X, target):
 
 
 def get_data(dataset_name):
-    SwissRoll = scipy.io.loadmat('dataset/' + dataset_name + '.mat')
+    SwissRoll = scipy.io.loadmat("NeuralNetworkNumpy\dataset\PeaksData.mat")
     y_train = np.array(SwissRoll['Ct'])
     X_train = np.array(SwissRoll['Yt'])
     y_test = np.array(SwissRoll['Cv'])

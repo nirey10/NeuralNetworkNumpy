@@ -31,6 +31,8 @@ if __name__=="__main__":
     optimizer = optimizers.SGD(model.parameters, lr=0.1)
     losses, train_accuracy, test_accuracy = model.fit(X_train, y_train, X_test, y_test, batch_size, num_epochs, optimizer)
 
+
+
     # plotting
     utils.plot_scores(train_accuracy, test_accuracy)
     utils.plot2DDataWithDecisionBoundary(X_test, y_test, model)
