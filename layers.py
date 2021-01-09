@@ -3,8 +3,8 @@ import numpy as np
 
 class Tensor:
     def __init__(self, shape):
-        self.data = np.ndarray(shape, np.float32)
-        self.grad = np.ndarray(shape, np.float32)
+        self.data = np.random.normal(size=shape)
+        self.grad = np.zeros(shape=shape)
 
 
 class Abstract_Layer(object):

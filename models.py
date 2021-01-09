@@ -60,12 +60,14 @@ class MyNeuralNetwork(Abstract_Model):
         return loss_history, train_accuracy, test_accuracy
 
     def forward(self, X):
-        for f in self.graph: X = f.forward(X)
+        for f in self.graph:
+            X = f.forward(X)
         return X
 
     def backward(self, true_label):
         grad = true_label
-        for f in self.graph[::-1]: grad = f.backward(grad)
+        for f in self.graph[::-1]:
+            grad = f.backward(grad)
 
     def evaluate(self, X_test, y_test):
         predicted_labels = np.argmax(self.predict(X_test), axis=1)
