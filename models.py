@@ -23,7 +23,7 @@ class MyNeuralNetwork(Abstract_Model):
 
     def init(self):
         for f in self.graph:
-            if f.type == 'linear':
+            if f.type == 'linear' or f.type == 'softmax':
                 weights, bias = f.parameters()
                 weights.data = .01 * np.random.randn(weights.data.shape[0], weights.data.shape[1])
                 bias.data = 0.
@@ -51,7 +51,6 @@ class MyNeuralNetwork(Abstract_Model):
                 optimizer.step()
                 epoch_acc = self.evaluate(X, Y)
                 epoch_accuracy.append(epoch_acc)
-
             train_acc = np.array(epoch_accuracy).sum()/epoch_iter
             train_accuracy.append(train_acc)
             test_acc = self.evaluate(X_test, y_test)

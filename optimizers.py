@@ -1,4 +1,4 @@
-
+from gradient_test import grad_test
 class Optimizer(object):
     def __init__(self, parameters):
         self.parameters = parameters
@@ -20,6 +20,7 @@ class SGD(Optimizer):
         self.lr = lr
 
     def step(self):
+
         for p in self.parameters:
             p.data = p.data - self.lr * p.grad
 
