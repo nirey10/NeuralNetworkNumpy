@@ -64,7 +64,8 @@ class MyNeuralNetwork(Abstract_Model):
 
     def backward(self, true_label):
         grad = true_label
-        for f in self.graph[::-1]: grad = f.backward(grad)
+        for f in self.graph[::-1]:
+            grad = f.backward(grad)
 
     def evaluate(self, X_test, y_test):
         predicted_labels = np.argmax(self.predict(X_test), axis=1)
