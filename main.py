@@ -5,7 +5,7 @@ import activations
 import layers
 import optimizers
 import models
-from network_tests import grad_test, jacobian_test
+from network_tests import grad_test, jacobian_test, grad_test2, jacobian_test2
 # TODO Organize this file
 
 if __name__=="__main__":
@@ -24,8 +24,8 @@ if __name__=="__main__":
     X_train, y_train = shuffle(X_train, y_train)
     #X_train, y_train = utils.genSpiralData(samples_per_class, num_classes)
 
-    grad_test(X_train, y_train)
-    jacobian_test(X_train, y_train)
+    grad_test2(X_train, y_train)
+    jacobian_test2(X_train, y_train)
 
     model = models.MyNeuralNetwork()
     model.add(layers.Linear(dimensions, hidden_units))

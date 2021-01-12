@@ -25,7 +25,8 @@ class MyNeuralNetwork(Abstract_Model):
         for f in self.graph:
             if f.type == 'linear' or f.type == 'softmax':
                 weights, bias = f.parameters()
-                weights.data = .01 * np.random.randn(weights.data.shape[0], weights.data.shape[1])
+                # weights.data = .01 * np.random.randn(weights.data.shape[0], weights.data.shape[1])
+                weights.data = .01 * np.random.random((weights.data.shape[0], weights.data.shape[1]))
                 bias.data = 0.
 
     def fit(self, X_train, y_train, X_test, y_test, batch_size, num_epochs, optimizer):
