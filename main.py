@@ -5,7 +5,7 @@ import activations
 import layers
 import optimizers
 import models
-from network_tests import grad_test, jacobian_test, grad_test2, jacobian_test2
+from network_tests import grad_test_W, grad_test_b, jacobian_test_W, jacobian_test_b
 # TODO Organize this file
 
 if __name__=="__main__":
@@ -22,10 +22,11 @@ if __name__=="__main__":
     # PeaksData  da, SwissRollData, GMMData
     X_train, y_train, X_test, y_test = utils.get_data('PeaksData')
     X_train, y_train = shuffle(X_train, y_train)
-    #X_train, y_train = utils.genSpiralData(samples_per_class, num_classes)
 
-    grad_test2(X_train, y_train)
-    jacobian_test2(X_train, y_train)
+    grad_test_W(X_train, y_train)
+    grad_test_b(X_train, y_train)
+    jacobian_test_W(X_train, y_train)
+    jacobian_test_b(X_train, y_train)
 
     model = models.MyNeuralNetwork()
     model.add(layers.Linear(dimensions, hidden_units))
@@ -33,7 +34,6 @@ if __name__=="__main__":
     model.add(layers.Softmax(hidden_units, 5))
     optimizer = optimizers.SGD(model.parameters, lr=0.1)
     losses, train_accuracy, test_accuracy = model.fit(X_train, y_train, X_test, y_test, batch_size, num_epochs, optimizer)
-
 
 
     # plotting

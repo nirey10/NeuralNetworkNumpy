@@ -27,7 +27,7 @@ class MyNeuralNetwork(Abstract_Model):
                 weights, bias = f.parameters()
                 # weights.data = .01 * np.random.randn(weights.data.shape[0], weights.data.shape[1])
                 weights.data = .01 * np.random.random((weights.data.shape[0], weights.data.shape[1]))
-                bias.data = 0.
+                bias.data = np.zeros((1, weights.data.shape[1]))
 
     def fit(self, X_train, y_train, X_test, y_test, batch_size, num_epochs, optimizer):
         loss_history = []

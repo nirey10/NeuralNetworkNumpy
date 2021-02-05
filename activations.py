@@ -31,7 +31,9 @@ class Tanh(Abstract_Activation):
         self.type = 'activation'
 
     def forward(self, x: np.ndarray) -> np.ndarray:
-        return np.tanh(x)
+        self.activation_output = np.tanh(x)
+        return self.activation_output
 
     def backward(self, d_y: np.ndarray) -> np.ndarray:
-        return 1.0 - np.tanh(d_y) ** 2
+        self.activation_grad = 1.0 - np.tanh(d_y) ** 2
+        return self.activation_grad

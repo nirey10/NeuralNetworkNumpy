@@ -1,4 +1,4 @@
-from network_tests import grad_test
+
 class Optimizer(object):
     def __init__(self, parameters):
         self.parameters = parameters
