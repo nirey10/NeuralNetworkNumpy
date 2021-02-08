@@ -25,7 +25,6 @@ class MyNeuralNetwork(Abstract_Model):
         for f in self.graph:
             if f.type == 'linear' or f.type == 'softmax':
                 weights, bias = f.parameters()
-                # weights.data = .01 * np.random.randn(weights.data.shape[0], weights.data.shape[1])
                 weights.data = .01 * np.random.random((weights.data.shape[0], weights.data.shape[1]))
                 bias.data = np.zeros((1, weights.data.shape[1]))
 
@@ -41,12 +40,10 @@ class MyNeuralNetwork(Abstract_Model):
             epoch_accuracy = []
             for X, Y in data_gen:
                 optimizer.zeroGrad()
-                #for f in self.graph: X = f.forward(X)
                 probabilities = self.forward(X)
                 loss = utils.cross_entropy_loss(probabilities, Y)
                 self.backward(Y)
                 loss_history += [loss]
-                #print("Loss at epoch = {} and iteration = {}: {}".format(epoch, itr, loss_history[-1]))
                 itr += 1
                 epoch_iter += 1
                 optimizer.step()
