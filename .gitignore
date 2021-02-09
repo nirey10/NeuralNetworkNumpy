@@ -1,5 +1,7 @@
 # Dan additions
 dataset/
+gradient_test.ipynb
+jacobian_tests.ipynb
 
 
 # Created by .ignore support plugin (hsz.mobi)
