@@ -321,7 +321,7 @@ def grad_test_W_whole_network(X_train, y_train):
                                 utils.cross_entropy_loss(probabilities_grad, x_label)))
 
     fig, axs = plt.subplots(2, 2, figsize=(12, 8), constrained_layout=True)
-    fig.suptitle('Gradient test by W', fontsize=16)
+    fig.suptitle('Full network gradient test by W', fontsize=16)
 
     axs[0, 0].plot(eps, grad_diff)
     axs[0, 0].set_xlabel('$\epsilon$')
@@ -388,7 +388,7 @@ def grad_test_b_whole_network(X_train, y_train):
                                 utils.cross_entropy_loss(probabilities_grad, x_label)))
 
     fig, axs = plt.subplots(2, 2, figsize=(12, 8), constrained_layout=True)
-    fig.suptitle('Gradient test by b', fontsize=16)
+    fig.suptitle('Full network gradient test by b', fontsize=16)
 
     axs[0, 0].plot(eps, grad_diff)
     axs[0, 0].set_xlabel('$\epsilon$')
