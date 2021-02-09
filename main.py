@@ -21,12 +21,12 @@ if __name__=="__main__":
     X_train, y_train = shuffle(X_train, y_train)
 
     # gradient and jacobian tests
-    # grad_test_W(X_train, y_train)
-    # grad_test_b(X_train, y_train)
-    # jacobian_test_W(X_train, y_train)
-    # jacobian_test_b(X_train, y_train)
-    # grad_test_W_whole_network(X_train, y_train)
-    # grad_test_b_whole_network(X_train, y_train)
+    grad_test_W(X_train, y_train)
+    grad_test_b(X_train, y_train)
+    jacobian_test_W(X_train, y_train)
+    jacobian_test_b(X_train, y_train)
+    grad_test_W_whole_network(X_train, y_train)
+    grad_test_b_whole_network(X_train, y_train)
 
     model = models.MyNeuralNetwork()
     model.add(layers.Linear(dimensions, hidden_units))
